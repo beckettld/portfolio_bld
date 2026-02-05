@@ -6,48 +6,62 @@ This lab covers creating a personal portfolio website from scratch and publishin
 ## Lab 1 Rubric - Requirements Checklist
 
 ### Repository + Publishing
-- [ ] A GitHub repository exists for the project (e.g. portfolio)
-- [ ] The repository is published to GitHub and the site loads at `https://YOUR_USERNAME.github.io/YOUR_REPO/`
-- [ ] Changes you made appear on the live site (i.e., you committed and pushed)
+- [x] A GitHub repository exists for the project (e.g. portfolio) ✅ **DONE** - Repository `portfoliobld` exists
+- [ ] The repository is published to GitHub and the site loads at `https://YOUR_USERNAME.github.io/YOUR_REPO/` ⚠️ **TODO** - Need to enable GitHub Pages
+- [ ] Changes you made appear on the live site (i.e., you committed and pushed) ⚠️ **TODO** - Need to commit and push all changes
 
 ### Required Site Structure
 Your repository must include the following pages:
-- [ ] `index.html` (home) in the repository root
-- [ ] `projects/index.html`
-- [ ] `contact/index.html`
-- [ ] A resume page (e.g. `resume/index.html` or `cv/index.html`)
+- [x] `index.html` (home) in the repository root ✅ **DONE**
+- [x] `projects/index.html` ✅ **DONE**
+- [x] `contact/index.html` ✅ **DONE**
+- [x] A resume page (e.g. `resume/index.html` or `cv/index.html`) ✅ **DONE** - `resume/index.html` exists
 
 Each page must have:
-- [ ] A meaningful `<title>` in the `<head>`
-- [ ] A top-level `<h1>` that matches the page content (Name/Home, Projects, Contact, Resume)
+- [x] A meaningful `<title>` in the `<head>` ✅ **DONE** - All pages have titles
+- [x] A top-level `<h1>` that matches the page content (Name/Home, Projects, Contact, Resume) ✅ **DONE** - All pages have proper h1 tags
 
 ### Navigation + Relative URLs
-- [ ] Every page includes a navigation menu
-- [ ] The navigation includes links to all pages, including the current page
-- [ ] Navigation works correctly from every page
-- [ ] The navigation includes a link to your GitHub profile that opens in a new tab
+- [x] Every page includes a navigation menu ✅ **DONE**
+- [x] The navigation includes links to all pages, including the current page ✅ **DONE**
+- [x] Navigation works correctly from every page ✅ **DONE** - Relative URLs are correct
+- [x] The navigation includes a link to your GitHub profile that opens in a new tab ✅ **DONE** - GitHub link with `target="_blank"`
 
 ### Home Page Content + Image
 The home page includes:
-- [ ] Your name
-- [ ] A short bio/description
-- [ ] An image with alt text
+- [x] Your name ✅ **DONE** - "Beckett Devoe"
+- [x] A short bio/description ✅ **DONE** - MIT 6-4 student bio
+- [x] An image with alt text ✅ **DONE** - Image tag with alt text (✅ **FIXED** - Now references `beckett.jpg`)
 
 ### CSS File + Linking
-- [ ] A `style.css` file exists in the repository root
-- [ ] Every page links to the stylesheet
+- [x] A `style.css` file exists in the repository root ✅ **DONE**
+- [x] Every page links to the stylesheet ✅ **DONE** - All pages have `<link>` tags
 
 ### Contact Form
-- [ ] The Contact page includes a working contact form
-- [ ] The form has `mailto:` + GET set correctly
-- [ ] The form includes fields for email, subject, and message, plus a Send button
-- [ ] Submitting the form opens a new email draft (or generates a mailto URL)
+- [x] The Contact page includes a working contact form ✅ **DONE**
+- [x] The form has `mailto:` + GET set correctly ✅ **DONE** - `action="mailto:bld@mit.edu" method="GET"`
+- [x] The form includes fields for email, subject, and message, plus a Send button ✅ **DONE**
+- [x] Submitting the form opens a new email draft (or generates a mailto URL) ✅ **DONE** - Form configured correctly
 
 ### Resume Page: Semantic Structure
 Resume content is organized with semantic HTML:
-- [ ] Uses at least 2 `<section>` elements (e.g., Education, Experience, Skills)
-- [ ] Uses headings/lists appropriately (not everything is plain paragraphs)
-- [ ] Uses `<time>` for at least 2 dates (where applicable)
+- [x] Uses at least 2 `<section>` elements (e.g., Education, Experience, Skills) ✅ **DONE** - Has Education, Experience, Skills, Resume PDF sections
+- [x] Uses headings/lists appropriately (not everything is plain paragraphs) ✅ **DONE** - Proper structure with h2, h3, ul, li
+- [x] Uses `<time>` for at least 2 dates (where applicable) ✅ **DONE** - Has 2 time elements for dates
+
+## What's Left To Do
+
+### Immediate Tasks:
+1. ✅ **Fix image filename**: ✅ **FIXED** - Updated to use `beckett.jpg`
+2. ⚠️ **Add resume PDF**: Place your resume PDF at `assets/resume.pdf` (currently the link exists but file is missing)
+3. ⚠️ **Commit and push**: Commit all your changes and push to GitHub
+4. ⚠️ **Enable GitHub Pages**: 
+   - Go to your GitHub repository settings
+   - Navigate to Pages section
+   - Select "main" branch
+   - Enable HTTPS
+   - Your site will be at `https://beckettld.github.io/portfoliobld/`
+5. ⚠️ **Test everything**: Verify all pages work correctly on the live site
 
 ## Step-by-Step Instructions
 
