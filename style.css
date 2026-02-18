@@ -277,7 +277,7 @@ article header {
 /* Projects Grid - Lab 2 Step 4.3-4.4 */
 .projects {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1em;
 }
 
