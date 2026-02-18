@@ -6,12 +6,18 @@
     --accent-color: #ff3300;
     --accent-hover: #ff6600;
     --accent-secondary: #ff9900;
+    /* Lab 2: Accent color custom property */
+    --color-accent: oklch(65% 50% 0);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
+    accent-color: var(--color-accent);
 }
 
 body {
@@ -25,7 +31,10 @@ body {
     background-size: 50px 50px;
     color: var(--accent-color);
     min-height: 100vh;
-    padding: 20px;
+    /* Lab 2 Step 1: Prevent content from getting too wide */
+    max-width: 100ch;
+    margin-inline: auto;
+    padding: 1em;
     position: relative;
     overflow-x: hidden;
 }
@@ -48,7 +57,14 @@ body>* {
     z-index: 1;
 }
 
-/* Navigation */
+/* Navigation - Lab 2 Step 2 */
+/* Step 2.1: Remove list styling if ul/li are used */
+nav ul,
+nav li {
+    display: contents;
+}
+
+/* Step 2.2-2.3: Flexbox layout and styling */
 nav {
     display: flex;
     flex-wrap: wrap;
@@ -56,54 +72,53 @@ nav {
     margin-bottom: 40px;
     padding: 20px;
     background: rgba(0, 0, 0, 0.8);
-    border: 2px solid var(--accent-color);
-    border-image: linear-gradient(45deg, var(--accent-color), var(--accent-hover), var(--accent-secondary)) 1;
-    box-shadow:
-        0 0 20px rgba(255, 50, 0, 0.5),
-        inset 0 0 20px rgba(255, 50, 0, 0.1);
+    border-bottom: 1px solid oklch(80% 3% 200);
     backdrop-filter: blur(10px);
 }
 
 nav a {
-    color: var(--accent-color);
+    flex: 1;
+    color: inherit;
     text-decoration: none;
+    text-align: center;
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 2px;
-    padding: 10px 20px;
-    border: 1px solid transparent;
+    padding: 0.5em;
     transition: all 0.3s ease;
     position: relative;
     font-family: 'Orbitron', monospace;
 }
 
-nav a::before {
-    content: '>';
-    margin-right: 5px;
-    color: var(--accent-hover);
-    opacity: 0;
-    transition: opacity 0.3s ease;
+/* Step 2.3: Current page styling */
+nav a.current {
+    border-bottom: 0.4em solid oklch(80% 3% 200);
+    padding-bottom: calc(0.5em - 0.4em);
+    color: var(--accent-color);
 }
 
-nav a:hover::before {
-    opacity: 1;
-}
-
+/* Step 2.4: Hover styles with accent color */
 nav a:hover {
-    color: #ffffff;
-    border-color: #ff6600;
-    box-shadow:
-        0 0 15px rgba(255, 100, 0, 0.8),
-        inset 0 0 15px rgba(255, 100, 0, 0.2);
-    text-shadow: 0 0 10px rgba(255, 100, 0, 1);
-    transform: translateX(5px);
+    color: var(--color-accent);
+    border-bottom: 0.4em solid var(--color-accent);
+    padding-bottom: calc(0.5em - 0.4em);
+    background-color: oklch(from var(--color-accent) 95% 5% h);
 }
 
-/* Headings */
+nav a.current:hover {
+    border-bottom-color: var(--color-accent);
+}
+
+/* Headings - Lab 2 Step 4.4 */
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.1;
+    text-wrap: balance;
+}
+
 h1 {
     font-family: 'Orbitron', monospace;
     font-weight: 900;
-    font-size: 3.5em;
+    font-size: 400%;
     color: #ff3300;
     text-shadow:
         0 0 10px rgba(255, 50, 0, 0.8),
@@ -156,9 +171,9 @@ p {
     margin: 30px 0;
 }
 
-/* Images */
+/* Images - Lab 2 Step 4.2 */
 img {
-    max-width: 50%;
+    max-width: 100%;
     height: auto;
     border: 3px solid var(--accent-color);
     box-shadow:
@@ -167,6 +182,10 @@ img {
     margin: 0;
     filter: contrast(1.1) brightness(0.9);
     transition: all 0.3s ease;
+}
+
+.profile-container img {
+    max-width: 50%;
     flex-shrink: 0;
 }
 
@@ -255,8 +274,37 @@ article header {
     margin-bottom: 15px;
 }
 
-/* Forms */
+/* Projects Grid - Lab 2 Step 4.3-4.4 */
+.projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+    gap: 1em;
+}
+
+.projects article {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    margin: 0;
+}
+
+.projects article h2 {
+    margin: 0;
+}
+
+/* Forms - Lab 2 Step 3 */
+/* Step 3.1: Inherit font */
+input,
+textarea,
+button {
+    font: inherit;
+}
+
+/* Step 3.3: Grid layout */
 form {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1em;
     max-width: 600px;
     margin: 30px 0;
     padding: 30px;
@@ -268,8 +316,9 @@ form {
 }
 
 label {
-    display: block;
-    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
     color: #ff3300;
     font-weight: 600;
     text-transform: uppercase;
@@ -280,16 +329,16 @@ label {
 input[type="text"],
 input[type="email"],
 textarea {
-    width: 100%;
     padding: 12px;
-    margin-top: 8px;
     background: rgba(0, 0, 0, 0.8);
     border: 2px solid var(--accent-color);
     color: #ff3300;
-    font-family: 'Rajdhani', monospace;
-    font-size: 16px;
     transition: all 0.3s ease;
     box-shadow: 0 0 10px rgba(255, 50, 0, 0.2);
+}
+
+button {
+    grid-column: 1 / -1;
 }
 
 input[type="text"]:focus,

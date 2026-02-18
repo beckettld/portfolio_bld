@@ -177,3 +177,252 @@ Create a `<form>` element in `contact/index.html`:
 You need to come to TA Office Hours to get checked off for this lab, OR submit your work asynchronously by filling out the form.
 
 **Note:** If you submit asynchronously and have an incorrect or incomplete part, you will not receive any credit (no partial credit). You may not resubmit nor ask for a synchronous check off for the same lab.
+
+---
+
+# Lab 2: Styling with CSS
+
+## Overview
+Lab 2 focuses on learning CSS fundamentals to style and improve the visual design of the portfolio website created in Lab 1. This lab covers CSS selectors, units, layout techniques (Flexbox and Grid), typography, colors, and responsive design.
+
+## Learning Objectives
+- Understand core CSS concepts (selectors, properties, values)
+- Learn to use CSS selectors to target specific elements
+- Understand the difference between absolute and relative units
+- Customize design aspects: fonts, colors, and layout
+- Handle CSS specificity and conflicting declarations
+- Implement responsive layouts using Flexbox and CSS Grid
+
+## Lab 2 Rubric - Requirements Checklist
+
+### Body Layout
+- [ ] Content width adjusts properly to smaller viewport sizes
+- [ ] Content remains centered
+- [ ] Content does not touch the edges of the viewport
+
+### Navigation Bar Styling
+- [ ] Current page is highlighted with:
+  - A distinct color
+  - A thicker underline or border
+- [ ] Hover effects on other sections:
+  - Color changes on hover
+  - Underline or border thickness changes on hover
+
+### Contact Form
+- [ ] Grid-based layout implemented:
+  - Email, subject, and message fields in one column
+  - Corresponding input boxes aligned in another column
+  - Proper spacing between form controls
+- [ ] Send button functions correctly and generates a URL to send an email
+
+### Projects Page
+- [ ] Contains dummy content for population
+- [ ] Adjusts dynamically to viewport size
+- [ ] Images do not become excessively wide
+- [ ] Grid-based layout for project display
+- [ ] Projects are aligned horizontally
+- [ ] Different heading levels (h1 vs h2) have distinguishable sizes
+
+### Resume (Free-Form)
+- [ ] Applied some CSS styling to the resume
+
+## Step-by-Step Instructions
+
+### Step 1: Prevent Content from Getting Too Wide
+**Goal:** Make content readable by limiting width and centering it.
+
+1. Apply `max-width` to `<body>` using relative units (em, rem, or ch)
+   - Recommended: `max-width: 100ch` (scales with font size)
+2. Center the content using `margin-inline: auto`
+3. Add padding to prevent content from touching viewport edges
+   - Alternative: Use `margin-inline: max(1em, (100% - 100ch) / 2)`
+
+**Key Concepts:**
+- `max-width` vs `width`: Allows content to adapt to smaller screens
+- Relative units (em, rem, ch): Scale with font size for better accessibility
+- `margin-inline`: Shorthand for left and right margins
+
+### Step 2: Styling the Navigation Bar
+
+#### Step 2.1: Getting `<ul>` and `<li>` Out of the Way
+- Apply `display: contents` to `<ul>` and `<li>` elements within `<nav>`
+- This removes default list styling (bullets, spacing)
+
+#### Step 2.2: Using Flexbox to Lay Out Navigation
+1. Wrap the current page menu item in an `<a>` tag with `class="current"`
+2. Apply `display: flex` to `<nav>` to enable Flexbox
+3. Apply `flex: 1` to each `<a>` element to make them equal width
+
+**Key Concepts:**
+- Flexbox: One-dimensional layout system
+- `flex: 1`: Distributes remaining space equally among flex items
+
+#### Step 2.3: Adding Style
+1. Remove underlines: `text-decoration: none`
+2. Inherit text color: `color: inherit`
+3. Center text: `text-align: center`
+4. Add padding: `padding: 0.5em`
+5. Add spacing: `margin-bottom` on `<nav>`
+6. Add bottom border: `border-bottom: 1px solid oklch(80% 3% 200)`
+7. Style current page link:
+   - Thick bottom border: `border-bottom-width: 0.4em`
+   - Reduce `padding-bottom` to counter border height
+
+#### Step 2.4: Accent Color and Hover Styles
+1. Define accent color as CSS custom property:
+   ```css
+   :root {
+     --color-accent: oklch(65% 50% 0);
+   }
+   ```
+2. Apply to `<html>` or `<body>`: `accent-color: var(--color-accent)`
+3. Style hovered links (`a:hover`):
+   - Same border as current page but with accent color
+   - Optional: Add light background: `background-color: oklch(from var(--color-accent) 95% 5% h)`
+
+**Key Concepts:**
+- CSS Custom Properties (variables): Reusable values defined with `--`
+- `var()`: Function to use custom properties
+- `oklch()`: Modern color space for better color manipulation
+
+### Step 3: Contact Form Layout
+
+#### Step 3.1: Integrate Typography
+- Apply `font: inherit` to form controls (`<input>`, `<textarea>`, `<button>`)
+- This makes them use the same font as the rest of the page
+
+#### Step 3.2: Top-Down Layout (Optional/Removed in Step 3.3)
+- `display: block` on form controls and labels
+- `width: 100%` on form controls
+- `box-sizing: border-box` on form controls
+- `margin-block` on labels for spacing
+
+#### Step 3.3: Grid Layout
+1. Remove CSS from Step 3.2
+2. Apply `display: grid` to `<form>`
+3. Define columns: `grid-template-columns: auto 1fr`
+   - `auto`: Column width matches content
+   - `1fr`: Remaining space
+4. Make labels span full width: `grid-column: 1 / -1`
+5. Use subgrid on labels:
+   - `display: grid` on `<label>`
+   - `grid-template-columns: subgrid`
+   - This aligns label text and input fields
+6. Apply same to submit button
+7. Add spacing: `gap: 1em`
+
+**Key Concepts:**
+- CSS Grid: Two-dimensional layout system
+- Subgrid: Allows nested grids to align with parent grid
+- `grid-column: 1 / -1`: Spans from first to last column
+- Automatic grid placement: Browser automatically places children
+
+### Step 4: Style Your Projects Page
+
+#### Step 4.1: Add Dummy Content
+Use Emmet abbreviation:
+```
+.projects>article*12>h2>lorem4^img[src="https://vis-society.github.io/labs/2/images/empty.svg"]+p>lorem
+```
+This creates 12 articles with headings, images, and paragraphs.
+
+#### Step 4.2: Stop Images from Getting Too Wide
+- Apply `max-width: 100%` to all images
+- Prevents images from exceeding container width
+
+#### Step 4.3: Applying a Responsive Grid
+1. Apply `display: grid` to `.projects`
+2. Use responsive columns: `grid-template-columns: repeat(auto-fill, minmax(15em, 1fr))`
+   - `auto-fill`: Creates as many columns as fit
+   - `minmax(15em, 1fr)`: Minimum 15em, maximum remaining space
+3. Add spacing: `gap: 1em`
+
+**Key Concepts:**
+- Responsive grid: Adapts to viewport size automatically
+- `repeat()`: Function to repeat grid tracks
+- `auto-fill`: Fills available space with columns
+
+#### Step 4.4: Horizontal Alignment with Subgrid
+1. Apply subgrid to `<article>` elements:
+   - `display: grid`
+   - `grid-template-rows: subgrid`
+   - `grid-row: span 3`
+2. Set `margin: 0` on `<h2>` to reduce spacing
+
+#### Step 4.5: Finishing Touches
+1. Make `<h1>` significantly larger (e.g., `font-size: 400%`)
+2. Style all headings:
+   - `line-height: 1.1` (tighter leading than body text)
+   - `text-wrap: balance` (prevents uneven lines)
+
+**Key Concepts:**
+- Typographic hierarchy: Different sizes create visual hierarchy
+- `text-wrap: balance`: Distributes text evenly across lines
+
+### Step 5: Style Your CV
+- Experiment freely with CSS to style the resume page
+- Apply what you've learned about layout, typography, and colors
+
+## Key CSS Concepts Covered
+
+### Selectors
+- Element selectors (`nav`, `body`)
+- Class selectors (`.projects`, `.current`)
+- Pseudo-class selectors (`:hover`, `:root`)
+- Descendant selectors
+
+### Units
+- **Relative units**: `em`, `rem`, `ch`, `%`, `fr`
+- **Absolute units**: `px` (use sparingly)
+- **Functions**: `max()`, `min()`, `var()`, `repeat()`, `minmax()`
+
+### Layout Methods
+- **Flexbox**: One-dimensional layouts (navigation bar)
+- **CSS Grid**: Two-dimensional layouts (forms, project grids)
+- **Subgrid**: Align nested content with parent grid
+
+### Properties
+- **Box Model**: `padding`, `margin`, `border`, `box-sizing`
+- **Typography**: `font`, `font-size`, `line-height`, `text-align`, `text-decoration`
+- **Colors**: `color`, `background-color`, `border-color`, `oklch()`
+- **Layout**: `display`, `grid-template-columns`, `grid-template-rows`, `gap`
+- **Spacing**: `margin-inline`, `margin-block`, `padding`
+
+### CSS Custom Properties
+- Define: `:root { --variable-name: value; }`
+- Use: `var(--variable-name)`
+- Allows for theme consistency and easy updates
+
+## CSS Resources
+
+### Interactive Learning
+- **CSS Box Model Playground**: Understand padding, margin, border
+- **Flexbox Froggy**: Learn Flexbox through a game
+- **Grid Garden**: Learn CSS Grid through a game
+
+### Documentation
+- MDN: Learn to style HTML using CSS
+- MDN: Basic concepts of flexbox
+- MDN: Basic concepts of grid layout
+- MDN: Subgrid
+- CSS Tricks: A Complete Guide to Flexbox
+- CSS Tricks: A Complete Guide to Grid
+
+### Tutorials
+- Khan Academy: Intro to HTML/CSS
+- Code Academy: Learn CSS
+- CSS in 20 Minutes (video)
+- 4-hour HTML & CSS crash course (video)
+
+## Important Notes
+
+- **Work in the same repository**: Continue working on your Lab 1 repository
+- **Commit frequently**: Save your progress regularly
+- **Test with browser dev tools**: Use responsive design mode to test different viewport sizes
+- **Use relative units**: Prefer `em`, `rem`, `ch` over `px` for better scalability
+- **CSS specificity**: When styles conflict, more specific selectors win
+- **Inheritance**: Many CSS properties inherit from parent elements
+- **Box model**: Understand how `padding`, `border`, and `margin` affect element size
+
+## Check-off
+Asynchronous lab checkoff is available. Submit your work by filling out the form. TAs will review and post your grade. If you don't pass, you can fix issues and resubmit or get help in office hours until the deadline.
