@@ -277,7 +277,7 @@ article header {
 /* Projects Grid - Lab 2 Step 4.3-4.4 */
 .projects {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
     gap: 1em;
 }
 
@@ -286,9 +286,25 @@ article header {
     grid-template-rows: subgrid;
     grid-row: span 3;
     margin: 0;
+    padding: 20px;
+    background: rgba(20, 0, 0, 0.4);
+    border-left: 3px solid var(--accent-secondary);
+    box-shadow: 0 0 10px rgba(255, 150, 0, 0.2);
+    overflow: hidden;
 }
 
 .projects article h2 {
+    margin: 0;
+    margin-bottom: 0.5em;
+}
+
+.projects article img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 0.5em;
+}
+
+.projects article p {
     margin: 0;
 }
 
