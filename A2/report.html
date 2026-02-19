@@ -106,26 +106,35 @@
     <p><strong>Primary data sources.</strong> I used the <strong>MBTA Network</strong> dataset (stops
         with route info and half-mile buffers), plus <strong>Single Family Zoning</strong> (Metro
         Boston, with census) and <strong>Residential Sales</strong> (Boston, 2000-2023) for housing type and
-        sale prices. That lets me link “nearest transit type” to “housing form” and “affordability” at the
+        sale prices. These sources let me link nearest transit type to housing form and affordability at the
         property level.</p>
 
-    <p><strong>What's in there.</strong> The stops file has a bit over 7,000 stops, each with name, fare zone (subway,
-        bus, commuter rail, ferry), and a list of routes, so I can tell bus-only stops from rail stations and
-        multi-route
-        hubs. The sales file has addresses, coordinates, and sale prices; the zoning file has municipal single-family vs
-        other housing share and some demographics. Most stops are bus; subway/commuter rail/ferry are fewer and along
-        specific corridors. About a third of stops have two or more routes (good candidates for "transfer hub"). Zoning
-        runs 0%-100% single-family by town; sales span 2000-2023 with coordinates I can use for spatial joins.</p>
+    <p><strong>What is in the data.</strong> The stops file has a bit over 7,000 stops, each with name, fare zone
+        (subway,
+        bus, commuter rail, ferry), and a list of routes, so I can distinguish bus-only stops from rail stations and
+        multi-route hubs. The sales file has addresses, coordinates, and sale prices; the zoning file has municipal
+        single-family versus
+        other housing share and some demographics. Most stops are bus-only; subway, commuter rail, and ferry stops are
+        fewer and lie along
+        specific corridors. About a third of stops have two or more routes, which are good candidates for transfer hubs.
+        Zoning
+        runs from 0% to 100% single-family by town, and sales span 2000–2023 with coordinates I can use for spatial
+        joins.</p>
 
-    <p><strong>Data quality and caveats.</strong> Stops and routes look complete; no missing route lists. Sales
+    <p><strong>Data quality and caveats.</strong> Stops and routes look complete, and there are no missing route lists.
+        Sales
         are limited to Boston proper (Cambridge, Somerville, and other municipalities are not in the sales file), so
-        affordability findings are Boston-specific. Housing “type” in this analysis comes from sales records (style) and
-        zoning/census, not a full building inventory; it's more “what sold and how it’s classified” than a complete picture of built form. Two geocoding-failure patterns were identified and filtered: coordinates
-        at (0,0) and a Rockport, MA fallback cluster; only sales within Boston’s lat/lon bounds and with positive price
-        were retained. One surprise: after that filter, only a handful of Boston sales have a Commuter Rail stop as nearest, so I could not analyze CR separately and focused on Rapid Transit vs Bus.</p>
+        affordability findings are Boston-specific. Housing type in this analysis comes from sales records (style) and
+        zoning or census, not a full building inventory; it reflects what sold and how it was classified rather than a
+        complete picture of built form. I identified and filtered two geocoding-failure patterns: coordinates
+        at (0,0) and a Rockport, MA fallback cluster. I retained only sales within Boston’s lat/lon bounds and with
+        positive price.
+        One surprise was that after that filter, only a handful of Boston sales had a Commuter Rail stop as nearest, so
+        I could not analyze Commuter Rail separately and focused on Rapid Transit versus Bus.</p>
 
-    <p><strong>Gut checks.</strong> Stops with lots of routes line up with known hubs (downtown, major stations). Bus dominates the stop counts, which matches how the MBTA’s network works. I spot-checked “nearest
-        stop” assignments against geography and did not see anything off. So the data look fine for this exploration.</p>
+    <p><strong>Gut checks.</strong> Stops with many routes line up with known hubs (downtown, major stations). Bus
+        dominates the stop counts, which matches how the MBTA network works. I spot-checked nearest-stop assignments
+        against geography and did not see anything off. The data look fine for this exploration.</p>
 
     <h2>Phase 2: Exploratory Analysis</h2>
     <p>For each question I started with a first-pass viz, then refined it (filtering, different aggregations, or
@@ -141,9 +150,12 @@
         <img src="visualizations/1.1.png"
             alt="Housing style distribution by nearest transit mode (Rapid Transit vs Bus)">
         <figcaption>
-            <strong>Figure 1: Housing style near different transit types.</strong> I first looked at raw counts by mode and style; normalizing to shares (this chart) made the comparison across modes much clearer. Stacked bars show the share of
+            <strong>Figure 1: Housing style near different transit types.</strong> I first looked at raw counts by mode
+            and style; normalizing to shares (this chart) made the comparison across modes much clearer. Stacked bars
+            show the share of
             residential sales (Boston, 2000-2023) by housing style for properties whose nearest MBTA stop is Rapid
-            Transit vs Bus. I normalized within each mode so the bars sum to 100% and added segment labels where there was room. Near Rapid Transit, High-Rise and Mid-Rise make up a much bigger share than near Bus stops, where
+            Transit vs Bus. I normalized within each mode so the bars sum to 100% and added segment labels where there
+            was room. Near Rapid Transit, High-Rise and Mid-Rise make up a much bigger share than near Bus stops, where
             Rowhouse and Low-Rise dominate. So yes, transit type at the nearest stop goes with different housing mixes.
             That matches what the TOD readings and my own experience in Boston suggest (subway = more apartments and
             mixed use, bus corridors = more rowhouses and lower density). This gave me a baseline before looking at
@@ -173,12 +185,17 @@
     <figure>
         <img src="visualizations/3.1.png" alt="Housing type mix: General Boston vs Hub vs Single stop">
         <figcaption>
-            <strong>Figure 3: Housing types: General vs hub vs single stop.</strong> I wanted to see if "hub" (2+ routes
-            at the nearest stop) looked different from "single stop." I first compared just hub vs single-stop; adding the general Boston bar gave a useful baseline for both. Here, horizontal grouped bars compare the share of sales
-            in each housing-style category for: all Boston (general), nearest stop is a hub, and nearest stop has one
-            route. Sample sizes are in the figure. Hubs have a higher share of High-Rise and Mid-Rise and lower
-            Rowhouse and Single Family than single-route stops; general Boston sits in between. So hubs in the data do
-            go with denser housing mixes. So more connected stations do seem to go with different development. I kept the three groups side by side so the comparison is easy to read.
+            <strong>Figure 3: Housing types: General vs hub vs single stop.</strong> I wanted to see whether a hub (two
+            or more routes
+            at the nearest stop) looked different from a single-route stop. I first compared hub versus single-stop;
+            adding the general Boston bar gave a useful baseline for both. Here, horizontal grouped bars compare the
+            share of sales
+            in each housing-style category for all Boston (general), for properties whose nearest stop is a hub, and for
+            those whose nearest stop has one
+            route. Hubs have a higher share of High-Rise and Mid-Rise and lower
+            Rowhouse and Single Family than single-route stops; general Boston sits in between. Hubs in the data are
+            associated with denser housing mixes, so more connected stations do seem to go with different development. I
+            kept the three groups side by side so the comparison is easy to read.
         </figcaption>
     </figure>
     <figure>
@@ -197,19 +214,16 @@
     </figure>
 
     <h2>Data Transformation</h2>
-    <p>I filtered sales to valid Boston coordinates and positive price (that removed the null-island and Rockport geocoding errors). I collapsed housing style into fewer categories (e.g. ROW-MIDDLE/ROW-END to Rowhouse, HIGH-RISE/MID-RISE to High-Rise/Mid-Rise) so the charts stayed readable. For each sale I found the nearest MBTA stop by Euclidean distance (in batches) and attached that stop's <em>mode</em> (Rapid Transit, Bus, or Commuter Rail) and <em>is_hub</em> (2+ routes). For the Q2 time series I aggregated by stop and year and kept only stops with at least 5 sales per year in at least 10 years so the median lines weren't driven by one or two sales. For the Q3 scatter I required at least 10 sales per stop and capped median price at $2M for the plot. I left Commuter Rail out of the Q1 and Q2 figures because so few Boston sales have a CR stop as nearest after the coordinate filter. All of this is in the notebook.
+    <p>I filtered sales to valid Boston coordinates and positive price (that removed the null-island and Rockport
+        geocoding errors). I collapsed housing style into fewer categories (e.g. ROW-MIDDLE/ROW-END to Rowhouse,
+        HIGH-RISE/MID-RISE to High-Rise/Mid-Rise) so the charts stayed readable. For each sale I found the nearest MBTA
+        stop by Euclidean distance (in batches) and attached that stop's <em>mode</em> (Rapid Transit, Bus, or Commuter
+        Rail) and <em>is_hub</em> (2+ routes). For the Q2 time series I aggregated by stop and year and kept only stops
+        with at least 5 sales per year in at least 10 years so the median lines weren't driven by one or two sales. For
+        the Q3 scatter I required at least 10 sales per stop and capped median price at $2M for the plot. I left
+        Commuter Rail out of the Q1 and Q2 figures because so few Boston sales have a CR stop as nearest after the
+        coordinate filter. All of this is in the notebook.
     </p>
-
-    <h2>Summary of Main Lessons</h2>
-    <div class="summary">
-        <p>Transit type at the nearest stop is strongly tied to both housing form and price in Boston: near Rapid
-            Transit you see more high-rise and mid-rise sales and higher prices than near bus-only stops. Hubs (2+
-            routes) show a denser housing mix and, in the routes-vs-price plot, a tendency toward higher median prices,
-            though with a lot of variation from stop to stop. So the questions I started with (from the TOD readings and
-            what I've seen in Boston) hold up in the data: different transit nodes do seem to go with different
-            housing, and connectivity tracks with density and cost. The caveats matter too: sales are Boston-only (no
-            Cambridge/Somerville in this file), Commuter Rail barely shows up after filtering, and "housing type" is from sales and zoning/census, not a full inventory. For a later project I'd want to push on place-level variation and maybe bring in zoning or policy to see how that interacts with transit and affordability.</p>
-    </div>
 
 </body>
 
