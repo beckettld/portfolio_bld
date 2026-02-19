@@ -1,0 +1,3 @@
+venv/
+# Brackets must be escaped so git treats the folder name literally
+A2 datasets \[SHARED\]/
