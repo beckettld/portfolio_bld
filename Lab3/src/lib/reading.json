@@ -1,0 +1,26 @@
+[
+  {
+    "title": "The Pragmatic Programmer",
+    "author": "David Thomas & Andrew Hunt",
+    "image": "https://covers.openlibrary.org/b/id/8091016-M.jpg",
+    "description": "A guide to becoming a better software craftsperson through practical advice and timeless principles."
+  },
+  {
+    "title": "Thinking, Fast and Slow",
+    "author": "Daniel Kahneman",
+    "image": "https://covers.openlibrary.org/b/id/8573234-M.jpg",
+    "description": "An exploration of the two systems that drive the way we think and make decisions."
+  },
+  {
+    "title": "The Design of Everyday Things",
+    "author": "Don Norman",
+    "image": "https://covers.openlibrary.org/b/id/8739161-M.jpg",
+    "description": "A fundamental look at how design shapes human behavior and how good design makes things intuitive."
+  },
+  {
+    "title": "Visualization Analysis and Design",
+    "author": "Tamara Munzner",
+    "image": "https://covers.openlibrary.org/b/id/7950026-M.jpg",
+    "description": "A systematic approach to building and evaluating visualizations using the nested model framework."
+  }
+]

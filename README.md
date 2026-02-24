@@ -426,3 +426,362 @@ This creates 12 articles with headings, images, and paragraphs.
 
 ## Check-off
 Asynchronous lab checkoff is available. Submit your work by filling out the form. TAs will review and post your grade. If you don't pass, you can fix issues and resubmit or get help in office hours until the deadline.
+
+---
+
+# Lab 3: Svelte (Templating & Control Flow)
+
+**Course:** Vis & Society 2026 — Theme: Housing Affordability
+
+In this lab, we will learn:
+
+- What is Svelte and why is it useful?
+- How does Svelte handle pages and navigation?
+- How can we use Svelte control flows and templates to format data?
+- How can we create and reuse Svelte components?
+
+## Table of contents
+
+- Check-off
+- Lab 3 Rubric
+- Prerequisites
+- Slides
+- Step 1: Getting started with a template repository
+- Step 2: Porting your previous website to Svelte
+- Step 3: Publishing our new website to GitHub Pages
+- Step 4: Control Flow Using Templates
+- Step 5: Creating a Svelte Component
+- Step 6: Practice — "What I'm Reading" Component
+- Appendix: Creating a Svelte Project from Scratch
+- Svelte and SvelteKit Resources
+
+## Check-off
+
+Asynchronous lab checkoff is no longer one-and-done. To receive a lab checkoff, please submit your work asynchronously by filling out [this form](https://forms.example.com). TAs will review your lab and post your grade. If you do not pass, you will be able to fix any issues and resubmit or receive help in an office hour until the deadline.
+
+## Lab 3 Rubric
+
+To successfully complete this lab check-off, ensure your work meets all of the following requirements:
+
+- Same functionality from Labs 1–2, just ported to SvelteKit.
+- Successfully deployed to GitHub Pages.
+- Correct file directory (pages are named correctly and placed in the correct folders).
+- Home page includes a subset of projects.
+- A "What I'm Reading" section appears on the homepage.
+- At least 3 different reading items are rendered dynamically in a consistent layout.
+- Each reading item includes:
+  - a title
+  - an author
+  - an image
+- The DOM shows repeated structural elements (indicating a loop, not manual copy-paste).
+
+## Prerequisites
+
+- You should have completed all the steps in **Lab 0** (Node.js and npm installed). You will not need the local server from Lab 0, as SvelteKit will provide its own.
+- This lab assumes you have already completed **Lab 1** and **Lab 2** as we will use the same website as a starting point.
+
+## Slides: What to Expect When You're Svelting
+
+Unlike the previous labs, this lab will not involve dramatic changes to the end-user experience of our website. In terms of user-facing changes, we will only be adding a section of the 3 selected projects to the home page, displaying a count of projects, and creating a "What I'm Reading" section on the homepage. However, we will be completely re-architecting its internals to make it much easier to make changes and evolve it over time.
+
+---
+
+## Step 1: Getting started with a template repository
+
+For this lab, we have provided a template repository for you to start from, where we have created a Svelte project with the basic layout of your portfolio website. In this step, you'll create your own repository from this template. (Instructions for creating a Svelte project from scratch are in the Appendix.)
+
+### Step 1.1: Creating your own repository from a template
+
+1. Visit the template repository and select **Use this template → Create a new repository** in the top right corner.
+2. Choose a name and visibility, and click **Create repository**.
+3. Clone this repository to your computer (e.g. in GitHub Desktop: **File → Clone repository...** or from the command line: `git clone https://github.com/[your username]/[your repository name].git`).
+
+### Step 1.2: Installing dependencies and viewing the site locally
+
+1. Open your new project in VS Code (e.g. **Repository → Open in Visual Studio Code** in GitHub Desktop).
+2. In the VS Code terminal, run:
+   ```bash
+   npm install
+   ```
+   This installs all dependencies from `package.json`. Be patient—it can take a while.
+3. Then run:
+   ```bash
+   npm run dev -- --open
+   ```
+   This starts a local server on port 5173 and opens http://localhost:5173/ in your browser.
+
+**Notes:**
+
+- Vite (used by SvelteKit) implements **hot reloading**: the page will automatically reload when you save a file. You may need to hard refresh (Ctrl+Shift+R or Command+Shift+R on Mac) to see styling changes due to browser caching.
+- You might see `NotFound [Error]: Not found: /style.css`. The site will still deploy; the error will disappear in Step 2 when you add `style.css`.
+- **Use Svelte 4 only.** The latest Svelte 5 is not compatible with this lab. Follow terminal commands exactly. You can check your version with `npm list svelte`.
+
+---
+
+## Step 2: Porting your previous website to Svelte
+
+### Step 2.0: Moving your assets
+
+Copy your `images/` folder and `style.css` into `static/` (via File Explorer or VS Code).
+
+### Step 2.1: Porting your pages to routes
+
+**Routing** is the process of determining what content to display based on the URL. SvelteKit uses a `routes` directory with `+page.svelte` files for each page. These are components whose special name tells SvelteKit they are pages.
+
+1. Open the `routes` directory. The template replicates your Lab 2 directory structure, but with `+page.svelte` instead of `index.html`.
+2. If you prefer different page names/URLs (e.g. `cv` instead of `resume`), rename the corresponding folder now.
+3. A Svelte page has three parts in order:
+   - A `<script>` element for JavaScript logic and data.
+   - HTML to display content.
+   - A `<style>` element for CSS that applies only to that page.
+4. Replace the homepage content (e.g. the default "Welcome to SvelteKit..." text) with the contents of your old site's `<body>` from the root `index.html`. **Do not** include the `<body>` tags themselves.
+5. If you get an error like *`<tag_name> is a void element and cannot have children*`, remove the closing `</tag_name>`; in Svelte, void elements don't have closing tags.
+6. For the other pages, copy the content from your old site (again, only what was inside `<body>`) into:
+   - `projects/index.html` → `routes/projects/+page.svelte`
+   - `resume/index.html` → `routes/resume/+page.svelte`
+   - `contact/index.html` → `routes/contact/+page.svelte`
+7. Use `<svelte:head>` to add elements to the document `<head>` (placed after `<script>` and at the top of the HTML). Other global `<head>` content is in `src/app.html` (e.g. link to `style.css`, default title). Do not remove the `%...%` placeholders in `app.html`.
+
+The nav will not work yet; fix it in Step 2.2. You can still open http://localhost:5173/projects, http://localhost:5173/contact, etc. manually to verify pages.
+
+### Step 2.2: Adjusting navigation bar URLs
+
+- Remove `index.html` from links, and any `../` or trailing slashes.
+- Use `.` or `./` for the homepage link (not an empty `href`).
+- Assign `class="current"` to the link for the current page.
+
+Example:
+
+```html
+<nav>
+  <a class="current" href=".">Home</a>
+  <a href="projects">Projects</a>
+  <a href="contact">Contact</a>
+  <a href="resume">Resume</a>
+  <a href="https://github.com/nicolatl" target="_blank">GitHub</a>
+</nav>
+```
+
+The first time you click through the nav you might see 404s; this can happen once and is addressed in a later lab.
+
+---
+
+## Step 3: Publishing our new website to GitHub Pages
+
+We do not commit build artifacts (e.g. `.svelte-kit`); it's in `.gitignore`. GitHub will build the site when deploying. Use **GitHub Actions** to run the build and deploy.
+
+**Note:** GitHub Actions is not available on MIT GitHub Enterprise; use a personal GitHub account.
+
+1. Commit and push your changes.
+2. On github.com: **Repo settings → Pages → Source: GitHub Actions**.
+3. Follow the [SvelteKit guide for deploying to GitHub Pages](https://kit.svelte.dev/docs/adapter-static#github-pages). Add/update:
+   - `.github/workflows/deploy.yml` (create `.github` and `workflows` if needed)
+   - `svelte.config.js` (replace the existing config)
+4. Commit and push these changes.
+
+Your site will be at `YOUR_USERNAME.github.io/REPO_NAME`. Check the **Actions** tab on your repo to see deployment status.
+
+---
+
+## Step 4: Control Flow Using Templates
+
+Storing project data in a separate JSON file and using templates avoids repeating HTML and makes it easy to show the same data in multiple places (e.g. homepage and projects page).
+
+### Step 4.1: JSON Objects and Arrays — Storing our Projects
+
+- **JSON**: key–value pairs; objects use `{}`, arrays use `[]`.
+- Each project can be an object with e.g. `title`, `image`, `description`.
+- Create `src/lib` and add `projects.json` there.
+- Use an array of project objects. Example:
+
+```json
+[
+  {
+    "title": "My First Project",
+    "image": "/images/project1.png",
+    "description": "This project explores..."
+  },
+  {
+    "title": "My Second Project",
+    "image": "/images/project2.png",
+    "description": "In this project, I..."
+  }
+]
+```
+
+Use double quotes for property names and string values.
+
+### Step 4.2: Importing our project data into our Projects page
+
+In `src/routes/projects/+page.svelte`, add at the top:
+
+```html
+<script>
+  import projects from "$lib/projects.json";
+</script>
+```
+
+Temporarily add `<pre>{ JSON.stringify(projects, null, "\t") }</pre>` to confirm the data loads, then remove it.
+
+### Step 4.3: Control flow with `{#each}`
+
+Keep one `<article>` as a template inside `<div class="projects">`. Wrap it in an `{#each}` block:
+
+```html
+<div class="projects">
+  {#each projects as p}
+    <article>
+      <h2>Lorem ipsum dolor sit.</h2>
+      <img src="..." alt="" />
+      <p>Lorem ipsum...</p>
+    </article>
+  {/each}
+</div>
+```
+
+You should see one block per project.
+
+### Step 4.4: Using variables to populate the template
+
+Replace the placeholder content with expressions: `{p.title}`, `{p.image}`, `{p.description}`. For the image use `src={p.image}` (no quotes around the expression). Edit `projects.json` and confirm the page updates.
+
+### Step 4.5: Counting projects
+
+Add a project count in the heading, e.g. `{ projects.length }`, so it updates automatically when the data changes.
+
+---
+
+## Step 5: Creating a Svelte Component
+
+Components encapsulate a piece of UI and can be reused. We'll make a `<Project>` component and use it on both the Projects page and the home page (first 3 projects).
+
+### Step 5.1: Creating a `<Project>` component
+
+1. Copy the `<article>` (and its contents) from the Projects page into a new file `src/lib/Project.svelte`.
+2. At the top add:
+   ```html
+   <script>
+     export let data = {};
+   </script>
+   ```
+   `export let data` defines a prop; other files pass data in via `data={...}`.
+3. In the template, replace `p` with `data` (e.g. `{data.title}`, `{data.image}`, `{data.description}`).
+
+### Step 5.2: Using the `<Project>` component on the Projects page
+
+In `routes/projects/+page.svelte`:
+
+- Import: `import Project from "$lib/Project.svelte";`
+- Replace each `<article>...</article>` with: `<Project data={p} />`
+
+### Step 5.3: Using the `<Project>` component on the home page
+
+- Copy the same `<script>` (imports for `projects` and `Project`) to the home page.
+- Add a section (e.g. "Latest projects") and use:
+  ```html
+  {#each projects.slice(0, 3) as p}
+    <Project data={p} />
+  {/each}
+  ```
+- Wrap in e.g. `<div class="projects">` or `<div class="projects highlights">` for styling.
+
+To show specific projects instead of the first three, use an array like `[projects[0], projects[3], projects[7]]` (arrays are 0-indexed).
+
+### Step 5.4: Moving Project-specific CSS to the Project component
+
+Move any CSS that only applies to the project `<article>` (e.g. `article { ... }`, `img { ... }`) from `style.css` into a `<style>` block at the bottom of `Project.svelte`. Svelte will scope this CSS to the component.
+
+---
+
+## Step 6: Practice — "What I'm Reading" Component
+
+Apply the same ideas with less guidance: data in JSON, `{#each}`, and a reusable component.
+
+### Step 6.1: Create a new data file
+
+- Create a JSON file in `src/lib/` (e.g. `reading.json`).
+- Use an array of objects. Each item should have at least:
+  - **title**
+  - **author**
+  - **image**
+- You can add more fields (link, year, description, etc.).
+
+### Step 6.2: Create a new component
+
+- Create a component in `src/lib/` (e.g. `ReadingItem.svelte`).
+- It should accept a prop (like `Project.svelte`), render title, author, and image, and have its own `<style>` block. Adapt the Project pattern; don’t copy it blindly.
+
+### Step 6.3: Display your reading list on the homepage
+
+In `routes/+page.svelte`:
+
+- Import the new JSON file and the `ReadingItem` component.
+- Add a section (e.g. "What I'm Reading") and use an `{#each}` block to render all items.
+- Wrap the list in a container (e.g. `<div class="reading">`).
+
+You should have: a second JSON file, a second reusable component, and a new templated section on the homepage. Editing `reading.json` should update the homepage.
+
+### Step 6.4: Apply styling (optional but recommended)
+
+Use layout (e.g. `display: flex`) and typography to create a clear hierarchy (e.g. image on the left, title/author/description on the right, distinct styles for title vs author). A [flexbox guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) can help.
+
+---
+
+## Appendix: Creating a Svelte Project from Scratch
+
+### A.1: Creating a new blank Svelte/SvelteKit project
+
+From the parent of your project folder:
+
+```bash
+npm create svelte@4 my-portfolio
+```
+
+Use **Skeleton project**, **No** for the options, and leave the last question unselected. This creates a folder (e.g. `my-portfolio`).
+
+### A.2: Creating a new repository
+
+In GitHub Desktop: **File → Add Local Repository…**, select the new folder. Create a repository when prompted, then **Publish repository** to GitHub.
+
+### A.3: Installing dependencies
+
+In the project folder in VS Code:
+
+```bash
+npm install && npm install -D svelte@4 && npm install -D @sveltejs/adapter-static@2
+```
+
+If `&&` doesn’t work, run each command separately. Then:
+
+```bash
+npm run dev -- --open
+```
+
+This uses Svelte 4 and the static adapter for GitHub Pages.
+
+---
+
+## Svelte and SvelteKit Resources
+
+- [Svelte](https://svelte.dev/)
+- [SvelteKit](https://kit.svelte.dev/)
+
+### JS resources
+
+- MDN: [JavaScript Basics](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- MDN: [JavaScript First Steps](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps)
+- [JS Garden](https://bonsaiden.github.io/JavaScript-Garden/) (quirks and gotchas)
+- [Learn JS Data](https://observablehq.com/@observablehq/learn-javascript) (Observable notebooks)
+
+### Videos
+
+- JavaScript in 12 Minutes
+- JS 1-Hour tutorial
+- A series of interactive JavaScript Tutorials
+- Udemy course
+
+### Books
+
+- *Eloquent JavaScript* by Marijn Haverbeke (free online)
+- *JavaScript: The Good Parts* by Douglas Crockford
+- *Learning JavaScript Design Patterns* by Addy Osmani
