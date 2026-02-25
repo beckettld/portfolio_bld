@@ -321,6 +321,17 @@ time {
     overflow-wrap: break-word;
 }
 
+/* Home page: highlighted first 3 projects */
+.projects.highlights {
+    margin-bottom: 2em;
+}
+
+.projects.highlights article {
+    border-left-width: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    background: var(--bg-secondary);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     h1 {
