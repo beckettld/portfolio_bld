@@ -4,10 +4,12 @@
 </script>
 
 <article>
-	{#if number}
-		<span class="project-number">Project {number}</span>
-	{/if}
-	<h2>{data.title}</h2>
+	<div class="title-group">
+		{#if number}
+			<span class="project-number">Project {number}</span>
+		{/if}
+		<h2>{data.title}</h2>
+	</div>
 	<img src={data.image} alt={data.title} />
 	<p>{data.description}</p>
 </article>
@@ -33,6 +35,11 @@
 		margin-bottom: 0.35em;
 		text-transform: uppercase;
 		letter-spacing: 0.02em;
+	}
+
+	.title-group {
+		display: flex;
+		flex-direction: column;
 	}
 
 	h2 {
