@@ -19,18 +19,18 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: Lab3
 
       - name: build
         env:
           BASE_PATH: '/${{ github.event.repository.name }}'
-        run: |
-          npm run build
+        run: npm run build
+        working-directory: Lab3
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          # this should match the `pages` option in your adapter-static options
-          path: 'build/'
+          path: 'Lab3/build/'
 
   deploy:
     needs: build_site
