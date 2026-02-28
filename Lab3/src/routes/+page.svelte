@@ -34,6 +34,9 @@
   <a href="{base}/A2/report.html">A2: Exploratory Visual Analysis</a> — Transit and
   housing affordability (HTML report with captioned visualizations).
 </p>
+<p>
+  <a href="{base}/A3/report.html">A3: Visualization Critique &amp; Redesign</a> — COVID-19 spiral chart critique and grid redesign (sketches, final viz, writeup).
+</p>
 
 <h2>Latest Projects ({projects.length} total)</h2>
 <div class="projects highlights">
