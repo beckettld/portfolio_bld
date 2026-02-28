@@ -37,8 +37,8 @@
 
 <h2>Latest Projects ({projects.length} total)</h2>
 <div class="projects highlights">
-  {#each projects.slice(0, 3) as p, i}
-    <Project data={p} number={i + 1} />
+  {#each projects.slice(0, 3) as p}
+    <Project data={p} />
   {/each}
 </div>
 
