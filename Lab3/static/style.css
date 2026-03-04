@@ -37,52 +37,6 @@ body {
     padding: 1em;
 }
 
-/* Navigation - Lab 2 Step 2 */
-/* Step 2.1: Remove list styling if ul/li are used */
-nav ul,
-nav li {
-    display: contents;
-}
-
-/* Step 2.2-2.3: Flexbox layout and styling */
-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-bottom: 60px;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--border-color);
-}
-
-nav a {
-    flex: 1;
-    color: inherit;
-    text-decoration: none;
-    text-align: center;
-    font-weight: 500;
-    font-size: 15px;
-    padding: 0.5em;
-    transition: all 0.2s ease;
-}
-
-/* Step 2.3: Current page styling */
-nav a.current {
-    border-bottom: 0.4em solid var(--border-color);
-    padding-bottom: calc(0.5em - 0.4em);
-    color: var(--accent-color);
-}
-
-/* Step 2.4: Hover styles with accent color */
-nav a:hover {
-    color: var(--color-accent);
-    border-bottom: 0.4em solid var(--color-accent);
-    padding-bottom: calc(0.5em - 0.4em);
-    background-color: oklch(from var(--color-accent) 95% 5% h);
-}
-
-nav a.current:hover {
-    border-bottom-color: var(--color-accent);
-}
 
 /* Headings - Lab 2 Step 4.4 */
 h1, h2, h3, h4, h5, h6 {

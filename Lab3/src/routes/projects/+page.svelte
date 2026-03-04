@@ -8,14 +8,6 @@
 	<title>Projects - Beckett Devoe</title>
 </svelte:head>
 
-<nav>
-	<a href="{base}/">Home</a>
-	<a class="current" href="{base}/projects">Projects</a>
-	<a href="{base}/contact">Contact</a>
-	<a href="{base}/resume">Resume</a>
-	<a href="https://github.com/beckettld" target="_blank">GitHub</a>
-</nav>
-
 <h1>Projects ({projects.length})</h1>
 
 <div class="projects">

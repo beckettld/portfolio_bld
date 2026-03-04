@@ -10,14 +10,6 @@
   <title>Beckett Devoe: Personal site and portfolio</title>
 </svelte:head>
 
-<nav>
-  <a class="current" href="{base}/">Home</a>
-  <a href="{base}/projects">Projects</a>
-  <a href="{base}/contact">Contact</a>
-  <a href="{base}/resume">Resume</a>
-  <a href="https://github.com/beckettld" target="_blank">GitHub</a>
-</nav>
-
 <h1>Beckett Lung Devoe</h1>
 
 <div class="profile-container">

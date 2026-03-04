@@ -6,14 +6,6 @@
 	<title>Resume - Beckett Devoe</title>
 </svelte:head>
 
-<nav>
-	<a href="{base}/">Home</a>
-	<a href="{base}/projects">Projects</a>
-	<a href="{base}/contact">Contact</a>
-	<a class="current" href="{base}/resume">Resume</a>
-	<a href="https://github.com/beckettld" target="_blank">GitHub</a>
-</nav>
-
 <h1>Resume</h1>
 
 <iframe

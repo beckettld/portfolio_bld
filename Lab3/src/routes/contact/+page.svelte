@@ -1,18 +1,6 @@
-<script>
-	import { base } from '$app/paths';
-</script>
-
 <svelte:head>
 	<title>Contact - Beckett Devoe</title>
 </svelte:head>
-
-<nav>
-	<a href="{base}/">Home</a>
-	<a href="{base}/projects">Projects</a>
-	<a class="current" href="{base}/contact">Contact</a>
-	<a href="{base}/resume">Resume</a>
-	<a href="https://github.com/beckettld" target="_blank">GitHub</a>
-</nav>
 
 <h1>Contact</h1>
 
