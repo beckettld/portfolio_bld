@@ -63,58 +63,138 @@
     <p><strong>Beckett Devoe</strong> · Vis & Society 2026 · Housing Affordability</p>
 
     <h2>1. Reading the Visualization</h2>
-    <p>The spiral chart encodes COVID-19 case counts over time as a continuous line spiraling outward from the center, with red hue and intensity representing case volume. The takeaway message is that COVID has gotten worse over time, peaking at the end of the visualization period. The spiral design compresses the data spatially, avoiding an extremely wide linear chart, and the red color effectively conveys urgency (more COVID = worse).</p>
+    <p>The spiral chart encodes COVID-19 case counts over time as a continuous line spiraling outward from the center,
+        with red hue and intensity representing case volume. The takeaway message is that COVID has gotten worse over
+        time, peaking at the end of the visualization period. The spiral design compresses the data spatially, avoiding
+        an extremely wide linear chart, and the red color effectively conveys urgency (more COVID = worse).</p>
 
     <h2>2. Critique</h2>
-    <p>The spiral design achieves its goal of compacting data that would otherwise require a very wide chart, and the red encoding appropriately evokes concern. However, the spiral introduces a significant perceptual problem: as the spiral expands outward, each ring occupies more space but represents the same time interval, making direct temporal comparison difficult. Earlier data (inner rings) are compressed into a narrow band, while recent data (outer rings) sprawl across much more visual space, distorting how we perceive trends. The height of the line (representing case count) becomes harder to judge consistently because the width of the spiral ring changes, and only four month labels (January, April, July, October) force viewers to estimate time for the unlabeled portions. Without contextual annotations, such as marking which variants dominated which peaks or when major policy shifts occurred, the underlying trends remain opaque.</p>
-    <p>To improve the design, consider using a more consistent temporal scale (such as a traditional line or area chart with responsive labeling) or, if the spiral is retained for visual interest, add event markers (e.g., "Omicron peak," "Vaccination campaign") and increase time labels to every month or quarter. This would preserve the spiral's compactness while making comparisons and interpretation clearer for the intended audience.</p>
+    <p>The spiral design achieves its goal of compacting data that would otherwise require a very wide chart, and the
+        red encoding appropriately evokes concern. However, the spiral introduces a significant perceptual problem: as
+        the spiral expands outward, each ring occupies more space but represents the same time interval, making direct
+        temporal comparison difficult. Earlier data (inner rings) are compressed into a narrow band, while recent data
+        (outer rings) sprawl across much more visual space, distorting how we perceive trends. The height of the line
+        (representing case count) becomes harder to judge consistently because the width of the spiral ring changes, and
+        only four month labels (January, April, July, October) force viewers to estimate time for the unlabeled
+        portions. Without contextual annotations, such as marking which variants dominated which peaks or when major
+        policy shifts occurred, the underlying trends remain opaque.</p>
+    <p>To improve the design, consider using a more consistent temporal scale (such as a traditional line or area chart
+        with responsive labeling) or, if the spiral is retained for visual interest, add event markers (e.g., "Omicron
+        peak," "Vaccination campaign") and increase time labels to every month or quarter. This would preserve the
+        spiral's compactness while making comparisons and interpretation clearer for the intended audience.</p>
 
     <h2>3. Sketches</h2>
     <h3>Sketch 1: Stacked Time-Series (Striped Area Chart)</h3>
     <figure>
         <img src="assets/s1.png" alt="Sketch 1: Stacked area chart with two time periods">
-        <figcaption>Simple stacked area chart showing 2020 and 2021 side by side, with shading to indicate case intensity.</figcaption>
+        <figcaption>Simple stacked area chart showing 2020 and 2021 side by side, with shading to indicate case
+            intensity.</figcaption>
     </figure>
     <p><strong>Rationale:</strong></p>
     <ul>
-        <li><strong>Motivation:</strong> To replace the spiral with a traditional, linear time representation that uses a consistent horizontal scale. By stacking the years and using striped/shaded fills to show intensity, the chart avoids the spatial distortion of the spiral while keeping a clean, intuitive layout.</li>
-        <li><strong>What I hoped it would communicate:</strong> A straightforward timeline that makes it obvious how much worse 2021 was compared to 2020, and where peaks occurred within each year. The consistent width for each time period makes direct comparison easier.</li>
-        <li><strong>What worked / what didn't:</strong> This design clearly solves the scaling problem. Each year takes equal horizontal space. However, it loses the visual drama of the spiral and may not capture the sense of "spiraling out of control" that the original conveyed. The striping is also harder to read as a precise intensity measure than a continuous color gradient.</li>
+        <li><strong>Motivation:</strong> To replace the spiral with a traditional, linear time representation that uses
+            a consistent horizontal scale. By stacking the years and using striped/shaded fills to show intensity, the
+            chart avoids the spatial distortion of the spiral while keeping a clean, intuitive layout.</li>
+        <li><strong>What I hoped it would communicate:</strong> A straightforward timeline that makes it obvious how
+            much worse 2021 was compared to 2020, and where peaks occurred within each year. The consistent width for
+            each time period makes direct comparison easier.</li>
+        <li><strong>What worked / what didn't:</strong> This design clearly solves the scaling problem. Each year takes
+            equal horizontal space. However, it loses the visual drama of the spiral and may not capture the sense of
+            "spiraling out of control" that the original conveyed. The striping is also harder to read as a precise
+            intensity measure than a continuous color gradient.</li>
     </ul>
 
     <h3>Sketch 2: Heat Map Grid (Cases by Week and Month)</h3>
     <figure>
         <img src="assets/s2.png" alt="Sketch 2: Heat map grid with weeks in columns and months in rows">
-        <figcaption>A grid-based heat map showing weeks (columns) and months (rows) from Jan 2020 to Oct 2021, with intensity representing case counts.</figcaption>
+        <figcaption>A grid-based heat map showing weeks (columns) and months (rows) from Jan 2020 to Oct 2021, with
+            intensity representing case counts.</figcaption>
     </figure>
     <p><strong>Rationale:</strong></p>
     <ul>
-        <li><strong>Motivation:</strong> To introduce a completely different visual form that addresses both the scale problem and the labeling problem. A heat map allows fine temporal granularity (week-by-week) while keeping all rows and columns equally sized, making both temporal and magnitude comparisons explicit.</li>
-        <li><strong>What I hoped it would communicate:</strong> Patterns in seasonality and waves of COVID, with clear row (seasonal) and column (weekly) structure. The grid makes it obvious when peaks occur and allows viewers to read both the calendar month and relative timing within that month.</li>
-        <li><strong>What worked / what didn't:</strong> The grid structure is highly legible and solves the distortion problem entirely. However, connecting individual weeks may obscure the underlying continuous trend, and the layout is less emotionally compelling than a flowing line or spiral. The dense grid might also be overwhelming if there are many weeks to display.</li>
+        <li><strong>Motivation:</strong> To introduce a completely different visual form that addresses both the scale
+            problem and the labeling problem. A heat map allows fine temporal granularity (week-by-week) while keeping
+            all rows and columns equally sized, making both temporal and magnitude comparisons explicit.</li>
+        <li><strong>What I hoped it would communicate:</strong> Patterns in seasonality and waves of COVID, with clear
+            row (seasonal) and column (weekly) structure. The grid makes it obvious when peaks occur and allows viewers
+            to read both the calendar month and relative timing within that month.</li>
+        <li><strong>What worked / what didn't:</strong> The grid structure is highly legible and solves the distortion
+            problem entirely. However, connecting individual weeks may obscure the underlying continuous trend, and the
+            layout is less emotionally compelling than a flowing line or spiral. The dense grid might also be
+            overwhelming if there are many weeks to display.</li>
     </ul>
 
     <h3>Sketch 3: Spiral with Shading for Density (Not Space)</h3>
     <figure>
         <img src="assets/s3.png" alt="Sketch 3: Spiral using shading intensity to represent case density">
-        <figcaption>A spiral design where shading or color intensity (rather than spatial height) encodes case density. A reference bar on the side shows the scale.</figcaption>
+        <figcaption>A spiral design where shading or color intensity (rather than spatial height) encodes case density.
+            A reference bar on the side shows the scale.</figcaption>
     </figure>
     <p><strong>Rationale:</strong></p>
     <ul>
-        <li><strong>Motivation:</strong> To keep the spiral's visual compactness and emotional impact, but solve the core distortion problem by encoding case density through shading/color intensity rather than spatial height. Shading is perceptually consistent across the spiral. It doesn't get distorted by spatial position the way line height or width does.</li>
-        <li><strong>What I hoped it would communicate:</strong> The same sense of escalating urgency and "spiraling out of control," but with accurate magnitude comparisons. By using color/shading density instead of spatial dimensions, I can compare 2020 (inner, lightly shaded) with 2021 (outer, intensely shaded) without the distortion that comes from the spiral's expanding width.</li>
-        <li><strong>What worked / what didn't:</strong> This elegantly solves the distortion problem. Shading intensity remains honest regardless of position on the spiral. The reference bar anchors the color scale. However, color encoding is typically less precise for magnitude comparison than spatial position, so viewers might struggle to extract exact case counts. It works well for conveying relative severity and trend but less well for precise numerical inference.</li>
+        <li><strong>Motivation:</strong> To keep the spiral's visual compactness and emotional impact, but solve the
+            core distortion problem by encoding case density through shading/color intensity rather than spatial height.
+            Shading is perceptually consistent across the spiral. It doesn't get distorted by spatial position the way
+            line height or width does.</li>
+        <li><strong>What I hoped it would communicate:</strong> The same sense of escalating urgency and "spiraling out
+            of control," but with accurate magnitude comparisons. By using color/shading density instead of spatial
+            dimensions, I can compare 2020 (inner, lightly shaded) with 2021 (outer, intensely shaded) without the
+            distortion that comes from the spiral's expanding width.</li>
+        <li><strong>What worked / what didn't:</strong> This elegantly solves the distortion problem. Shading intensity
+            remains honest regardless of position on the spiral. The reference bar anchors the color scale. However,
+            color encoding is typically less precise for magnitude comparison than spatial position, so viewers might
+            struggle to extract exact case counts. It works well for conveying relative severity and trend but less well
+            for precise numerical inference.</li>
     </ul>
 
     <h2>4. Final Design</h2>
     <figure>
         <img src="assets/final.png" alt="COVID-19 weekly cases heat map grid, 2020–2022">
-        <figcaption><strong>COVID-19 Cases in the United States, 2020–2022.</strong> Each cell represents one week; color intensity (white to deep red) encodes new confirmed cases. Each year is a 4-column by 13-row block, with columns representing week-within-month (W1–W4) and rows representing approximate months grouped by quarter. Quarter labels (Q1–Q4) run along the left axis.</figcaption>
+        <figcaption><strong>COVID-19 Cases in the United States, 2020–2022.</strong> Each cell represents one week;
+            color intensity (white to deep red) encodes new confirmed cases. Each year is a 4-column by 13-row block,
+            with columns representing week-within-month (W1–W4) and rows representing approximate months grouped by
+            quarter. Quarter labels (Q1–Q4) run along the left axis.</figcaption>
     </figure>
 
     <h3>Final writeup</h3>
-    <p>This final design is a direct iteration on Sketch 2, which introduced the grid heat map concept. The core idea from that sketch (equal-sized cells organized by week and time of year, with color encoding case intensity) is what carried forward here. The final version refines that sketch by splitting the grid into year blocks, switching to quarterly labels to solve the month drift problem I identified while sketching, and settling on square cells over the rectangular grid to keep the mark type neutral. The goal of this design is to show the severity and wave structure of COVID-19 cases in the US from 2020 to 2022, and to make it instantly clear that the Omicron wave in January 2022 was in a completely different league from everything that came before it. The overall structure is three year blocks arranged side by side, each one a 4-column by 13-row grid of square cells, where each cell is one week. This layout was chosen because it gives every time period exactly the same amount of visual space, which is the core problem with the original spiral. The three-block side-by-side framing lets viewers compare across years naturally, reading left to right like a timeline, while the vertical structure within each block lets them scan seasonally, comparing the same time of year across rows. Arranging weeks into groups of four per row makes the grouping roughly correspond to months, giving the chart an intuitive structure without having to rely on precise month labels that would drift out of alignment by December. To avoid that drift entirely, I only labeled quarters (Q1, Q2, Q3, Q4) along the left axis. Each quarter is exactly 13 weeks, so the labels line up with the grid precisely and never mislead. The year labels are large and bold at the top of each block so the viewer immediately understands the three-column structure before looking at any individual cell. The W1 through W4 column headers above the first block give a subtle reminder of what the columns mean without cluttering the other two blocks.</p>
-    <p>Each cell is a square specifically so it reads as a single unit of time and nothing more. Rectangles would imply a direction or a scale difference between axes, so squares keep the encoding clean and neutral. The color scale runs from white at zero cases to deep red at the maximum, which was about 5.6 million cases in early January 2022. White was chosen as the baseline because it reads as absence or near-absence, and the gradient into red is a direct visual metaphor for danger and worsening conditions, which maps cleanly onto how the audience already thinks about COVID. The color choice also means that the Omicron peak in Q1 2022 is immediately the most visually dominant feature of the entire chart, which is the intended message. This encoding also directly solves the main problem I raised in the critique of the spiral: in the spiral, spatial height encodes case counts but the ring width changes as the spiral expands, which distorts how tall any given spike looks depending on where in the spiral it falls. Color intensity has no spatial dependency, so a cell in 2020 and a cell in 2022 are visually comparable in a way that the spiral simply cannot achieve. Grey cells mark weeks with no data, and a "No data" swatch is included next to the colorbar so viewers are not confused about whether grey means zero cases or missing data. The colorbar itself uses human-readable labels (1M, 2M, etc.) instead of scientific notation to keep it accessible. The title is plain and descriptive, naming the subject, the country, and the time range so the chart is interpretable without reading any surrounding text. Things this design necessarily hides include day-to-day variation (smoothed out by weekly aggregation), geographic differences across states, demographic breakdowns, and any annotation of policy events or variant names. The tradeoff is that this chart is less emotionally dramatic than the spiral but far more trustworthy for comparison. A viewer can look at any two cells and know their sizes mean the same thing.</p>
+    <p>This final design is a direct iteration on Sketch 2, which introduced the grid heat map concept. The core idea
+        from that sketch (equal-sized cells organized by week and time of year, with color encoding case intensity) is
+        what carried forward here. The final version refines that sketch by splitting the grid into year blocks,
+        switching to quarterly labels to solve the month drift problem I identified while sketching, and settling on
+        square cells over the rectangular grid to keep the mark type neutral. The goal of this design is to show the
+        severity and wave structure of COVID-19 cases in the US from 2020 to 2022, and to make it instantly clear that
+        the Omicron wave in January 2022 was in a completely different league from everything that came before it. The
+        overall structure is three year blocks arranged side by side, each one a 4-column by 13-row grid of square
+        cells, where each cell is one week. This layout was chosen because it gives every time period exactly the same
+        amount of visual space, which is the core problem with the original spiral. The three-block side-by-side framing
+        lets viewers compare across years naturally, reading left to right like a timeline, while the vertical structure
+        within each block lets them scan seasonally, comparing the same time of year across rows. Arranging weeks into
+        groups of four per row makes the grouping roughly correspond to months, giving the chart an intuitive structure
+        without having to rely on precise month labels that would drift out of alignment by December. To avoid that
+        drift entirely, I only labeled quarters (Q1, Q2, Q3, Q4) along the left axis. Each quarter is exactly 13 weeks,
+        so the labels line up with the grid precisely and never mislead. The year labels are large and bold at the top
+        of each block so the viewer immediately understands the three-column structure before looking at any individual
+        cell. The W1 through W4 column headers above the first block give a subtle reminder of what the columns mean
+        without cluttering the other two blocks.</p>
+    <p>Each cell is a square specifically so it reads as a single unit of time and nothing more. Rectangles would imply
+        a direction or a scale difference between axes, so squares keep the encoding clean and neutral. The color scale
+        runs from white at zero cases to deep red at the maximum, which was about 5.6 million cases in early January
+        2022. White was chosen as the baseline because it reads as absence or near-absence, and the gradient into red is
+        a direct visual metaphor for danger and worsening conditions, which maps cleanly onto how the audience already
+        thinks about COVID. The color choice also means that the Omicron peak in Q1 2022 is immediately the most
+        visually dominant feature of the entire chart, which is the intended message. This encoding also directly solves
+        the main problem I raised in the critique of the spiral: in the spiral, spatial height encodes case counts but
+        the ring width changes as the spiral expands, which distorts how tall any given spike looks depending on where
+        in the spiral it falls. Color intensity has no spatial dependency, so a cell in 2020 and a cell in 2022 are
+        visually comparable in a way that the spiral simply cannot achieve. Grey cells mark weeks with no data, and a
+        "No data" swatch is included next to the colorbar so viewers are not confused about whether grey means zero
+        cases or missing data. The colorbar itself uses human-readable labels (1M, 2M, etc.) instead of scientific
+        notation to keep it accessible. The title is plain and descriptive, naming the subject, the country, and the
+        time range so the chart is interpretable without reading any surrounding text. Things this design necessarily
+        hides include day-to-day variation (smoothed out by weekly aggregation), geographic differences across states,
+        demographic breakdowns, and any annotation of policy events or variant names. The tradeoff is that this chart is
+        less emotionally dramatic than the spiral but far more trustworthy for comparison. A viewer can look at any two
+        cells and know their sizes mean the same thing.</p>
 
 </body>
 
