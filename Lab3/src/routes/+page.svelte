@@ -29,6 +29,9 @@
 <p>
   <a href="{base}/A3/report.html">A3: Visualization Critique &amp; Redesign</a> — COVID-19 spiral chart critique and grid redesign (sketches, final viz, writeup).
 </p>
+<p>
+  <a href="{base}/A4/report.html">A4: Persuasive or Deceptive Visualization?</a> — NYPD complaint accountability analysis with contrasting persuasive and earnest visualizations.
+</p>
 
 <h2>Latest Projects ({projects.length} total)</h2>
 <div class="projects highlights">
