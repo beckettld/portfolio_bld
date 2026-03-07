@@ -9,15 +9,15 @@
 }
 
 :root {
-    --accent-color: #2563eb;
-    --accent-hover: #1d4ed8;
-    --text-primary: #1f2937;
-    --text-secondary: #6b7280;
-    --bg-primary: #ffffff;
-    --bg-secondary: #f9fafb;
-    --border-color: #e5e7eb;
-    /* Lab 2: Accent color custom property */
+    color-scheme: light dark;
     --color-accent: oklch(65% 50% 0);
+    --accent-color: light-dark(#2563eb, #60a5fa);
+    --accent-hover: light-dark(#1d4ed8, #93c5fd);
+    --text-primary: light-dark(#1f2937, #f9fafb);
+    --text-secondary: light-dark(#6b7280, #9ca3af);
+    --bg-primary: light-dark(#ffffff, #111827);
+    --bg-secondary: light-dark(#f9fafb, #1f2937);
+    --border-color: light-dark(#e5e7eb, #374151);
 }
 
 html {
@@ -90,7 +90,7 @@ img {
     height: auto;
     border-radius: 8px;
     margin: 0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4));
 }
 
 .profile-container img {
@@ -282,7 +282,7 @@ time {
 
 .projects.highlights article {
     border-left-width: 5px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px light-dark(rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.4));
     background: var(--bg-secondary);
 }
 
