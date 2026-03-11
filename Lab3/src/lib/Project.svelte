@@ -1,6 +1,8 @@
 <script>
+	import { base } from "$app/paths";
 	export let data = {};
 	export let number = 0;
+	$: imageSrc = data.image?.startsWith("http") ? data.image : (base ? base + "/" + data.image : data.image);
 </script>
 
 <article>
@@ -10,7 +12,7 @@
 		{/if}
 		<h2>{data.title}</h2>
 	</div>
-	<img src={data.image} alt={data.title} />
+	<img src={imageSrc} alt={data.title} />
 	<p>{data.description}</p>
 </article>
 

@@ -1,9 +1,25 @@
 <script>
+  import { onMount } from "svelte";
   import { base } from "$app/paths";
   import projects from "$lib/projects.json";
   import Project from "$lib/Project.svelte";
   import readings from "$lib/reading.json";
   import ReadingItem from "$lib/ReadingItem.svelte";
+
+  let githubData = null;
+  let loading = true;
+  let error = null;
+
+  onMount(async () => {
+    try {
+      const response = await fetch("https://api.github.com/users/beckettld");
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      githubData = await response.json();
+    } catch (err) {
+      error = err;
+    }
+    loading = false;
+  });
 </script>
 
 <svelte:head>
@@ -33,6 +49,26 @@
   <a href="{base}/A4/report.html">A4: Persuasive or Deceptive Visualization?</a> — NYPD complaint accountability analysis with contrasting persuasive and earnest visualizations.
 </p>
 
+{#if loading}
+  <p>Loading...</p>
+{:else if error}
+  <p>Something went wrong: {error.message}</p>
+{:else}
+  <section class="github-stats">
+    <h2>My GitHub Stats</h2>
+    <dl>
+      <dt>Followers</dt>
+      <dd>{githubData.followers}</dd>
+      <dt>Following</dt>
+      <dd>{githubData.following}</dd>
+      <dt>Public Repositories</dt>
+      <dd>{githubData.public_repos}</dd>
+      <dt>Public Gists</dt>
+      <dd>{githubData.public_gists}</dd>
+    </dl>
+  </section>
+{/if}
+
 <h2>Latest Projects ({projects.length} total)</h2>
 <div class="projects highlights">
   {#each projects.slice(0, 3) as p}
@@ -46,3 +82,23 @@
     <ReadingItem data={item} />
   {/each}
 </div>
+
+<style>
+  .github-stats {
+    margin: 2rem 0;
+  }
+  .github-stats dl {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem 1rem;
+  }
+  .github-stats dt {
+    grid-row: 1;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+  .github-stats dd {
+    grid-row: 2;
+    margin: 0;
+  }
+</style>

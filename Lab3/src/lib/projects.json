@@ -1,62 +1,72 @@
 [
   {
+    "title": "A2: Exploratory Visual Analysis",
+    "year": 2024,
+    "image": "assets/images/a2.png",
+    "description": "Transit and housing affordability — HTML report with captioned visualizations.",
+    "story": "My first real dive into exploratory data analysis. I learned to ask questions of transit and housing data, then turn those questions into clear charts. The hardest part was choosing which encodings actually helped readers see the story."
+  },
+  {
+    "title": "A3: Visualization Critique & Redesign",
+    "year": 2024,
+    "image": "assets/images/a3.png",
+    "description": "COVID-19 spiral chart critique and grid redesign (sketches, final viz, writeup).",
+    "story": "I took apart a confusing COVID spiral chart and rebuilt it as a simple grid. It taught me that 'clever' visualizations often hide more than they reveal, and that clarity beats novelty."
+  },
+  {
+    "title": "A4: Persuasive / Deceptive Viz",
+    "year": 2025,
+    "image": "assets/images/a4.png",
+    "description": "NYPD complaint accountability analysis with persuasive and earnest visualizations.",
+    "story": "Building two views of the same data — one persuasive, one earnest — showed me how framing and design choices shape what people believe. Accountability starts with seeing the same numbers from more than one angle."
+  },
+  {
     "title": "Lorem ipsum dolor sit",
+    "year": 2020,
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "story": "An early experiment with layout and typography. I was still learning how structure and spacing affect readability."
   },
   {
     "title": "Consectetur adipiscing elit",
+    "year": 2021,
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "story": "This project pushed me to think about responsive design and how content reflows on different screen sizes."
   },
   {
     "title": "Sed do eiusmod tempor",
+    "year": 2022,
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
+    "description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+    "story": "Here I started combining data sources and thinking about how to present multiple datasets in one coherent view."
   },
   {
     "title": "Incididunt ut labore",
+    "year": 2022,
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+    "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
+    "story": "Focus on interaction: tooltips, filters, and letting the user explore rather than just scroll."
   },
   {
     "title": "Et dolore magna",
+    "year": 2023,
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
+    "description": "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
+    "story": "I worked on narrative structure — how to order and annotate views so the story builds step by step."
   },
   {
     "title": "Aliqua ut enim",
+    "year": 2023,
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur."
+    "description": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.",
+    "story": "Accessibility became a priority: color contrast, alt text, and keyboard navigation so more people could use the result."
   },
   {
     "title": "Ad minim veniam",
+    "year": 2025,
     "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident."
-  },
-  {
-    "title": "Quis nostrud exercitation",
-    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": "Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio."
-  },
-  {
-    "title": "Ullamco laboris nisi",
-    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus."
-  },
-  {
-    "title": "Ut aliquip ex",
-    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae."
-  },
-  {
-    "title": "Ea commodo consequat",
-    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": "Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."
-  },
-  {
-    "title": "Duis aute irure",
-    "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-    "description": "Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.",
+    "story": "Pulling together everything from previous projects into a single, cohesive portfolio piece."
   }
 ]
