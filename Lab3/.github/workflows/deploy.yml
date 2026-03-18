@@ -28,10 +28,24 @@ jobs:
       - name: Generate loc.csv
         run: npx elocuent -d static,src -o static/loc.csv
 
+      - name: Verify loc.csv was generated
+        run: |
+          echo "=== static/ contents ==="
+          ls -la static/
+          echo "=== loc.csv first 5 lines ==="
+          head -5 static/loc.csv
+
       - name: Build
         env:
           BASE_PATH: '/${{ github.event.repository.name }}'
         run: npm run build
+
+      - name: Verify build output
+        run: |
+          echo "=== build/ contents ==="
+          ls -la build/
+          echo "=== loc.csv in build? ==="
+          ls -la build/loc.csv || echo "NOT FOUND"
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
