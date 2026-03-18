@@ -14,6 +14,9 @@
 	</div>
 	<img src={imageSrc} alt={data.title} />
 	<p>{data.description}</p>
+	{#if data.year}
+		<span class="project-year">{data.year}</span>
+	{/if}
 </article>
 
 <style>
@@ -62,5 +65,17 @@
 	p {
 		margin: 0;
 		overflow-wrap: break-word;
+	}
+
+	.project-year {
+		display: inline-block;
+		margin-top: 0.6em;
+		font-size: 0.78em;
+		font-weight: 600;
+		color: var(--accent-color, #2563eb);
+		background: color-mix(in oklch, var(--accent-color, #2563eb), canvas 88%);
+		padding: 0.2em 0.5em;
+		border-radius: 3px;
+		letter-spacing: 0.04em;
 	}
 </style>

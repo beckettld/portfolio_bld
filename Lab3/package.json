@@ -11,10 +11,12 @@
   "devDependencies": {
     "@sveltejs/adapter-static": "^2.0.0",
     "@sveltejs/kit": "^1.27.4",
+    "elocuent": "^0.0.4",
     "svelte": "^4.2.7",
     "vite": "^4.5.1"
   },
   "dependencies": {
+    "d3": "^7.9.0",
     "svelte-scrolly": "^0.0.4"
   }
 }
