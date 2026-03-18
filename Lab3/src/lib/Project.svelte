@@ -2,7 +2,7 @@
 	import { base } from "$app/paths";
 	export let data = {};
 	export let number = 0;
-	$: imageSrc = data.image?.startsWith("http") ? data.image : (base ? base + "/" + data.image : data.image);
+	$: imageSrc = data.image?.startsWith("http") ? data.image : `${base}/${data.image}`;
 </script>
 
 <article>
