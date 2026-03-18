@@ -23,6 +23,10 @@ jobs:
         run: npm ci
         working-directory: Lab3
 
+      - name: Generate loc.csv
+        run: npx elocuent -d static,src -o static/loc.csv
+        working-directory: Lab3
+
       - name: Build
         env:
           BASE_PATH: '/${{ github.event.repository.name }}'
