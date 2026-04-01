@@ -260,6 +260,7 @@
 		padding: 0.75em 1em;
 		z-index: 10;
 		pointer-events: none;
+		color: black;
 	}
 
 	h2 {
