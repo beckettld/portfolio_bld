@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import * as d3 from 'd3';
 	import BarHorizontal from '$lib/BarHorizontal.svelte';
+	import LineChart from '$lib/LineChart.svelte';
 	import {
 		computePosition,
 		autoPlacement,
@@ -13,6 +14,54 @@
 	let barData = [];
 	let commits = [];
 	let clickedCommits = [];
+	let svg;
+	let brushSelection = null;
+	let linesByDate = [];
+
+	$: {
+		if (svg) {
+			d3.select(svg).call(
+				d3.brush()
+					.extent([[usableArea.left, usableArea.top], [usableArea.right, usableArea.bottom]])
+					.on("start brush end", brushed)
+			);
+			d3.select(svg).selectAll(".dots, .overlay ~ *").raise();
+		}
+	}
+
+	function brushed(evt) {
+		brushSelection = evt.selection;
+	}
+
+	function isCommitBrushed(commit) {
+		if (!brushSelection) return false;
+		const [[x0, y0], [x1, y1]] = brushSelection;
+		const cx = xScale(commit.datetime);
+		const cy = yScale(commit.hourFrac);
+		return cx >= x0 && cx <= x1 && cy >= y0 && cy <= y1;
+	}
+
+	$: brushedCommits = brushSelection ? commits.filter(isCommitBrushed) : [];
+	$: selectedCommits = Array.from(new Set([...clickedCommits, ...brushedCommits]));
+
+	$: {
+		if (locData.length > 0) {
+			const rolled = d3.rollups(
+				locData,
+				v => v.length,
+				d => d3.timeDay.floor(d.datetime)
+			).map(([date, count]) => ({ date, count }));
+
+			const [minD, maxD] = d3.extent(rolled, d => d.date);
+			if (minD && maxD) {
+				const allDays = d3.timeDays(minD, d3.timeDay.offset(maxD, 1));
+				linesByDate = allDays.map(date => ({
+					date,
+					count: rolled.find(r => r.date.getTime() === date.getTime())?.count ?? 0
+				}));
+			}
+		}
+	}
 
 	let hoveredIndex = -1;
 	$: hoveredCommit = commits[hoveredIndex] ?? hoveredCommit ?? {};
@@ -72,8 +121,8 @@
 	// Filtered bar data
 	$: {
 		if (locData.length > 0) {
-			let selectedLines = clickedCommits.length > 0
-				? clickedCommits.flatMap(c => c.lines)
+			let selectedLines = selectedCommits.length > 0
+				? selectedCommits.flatMap(c => c.lines)
 				: locData;
 
 			let lineCounts = d3.rollup(selectedLines, v => v.length, d => d.type);
@@ -86,8 +135,8 @@
 		}
 	}
 
-	$: barTitle = clickedCommits.length > 0
-		? `Language Breakdown (${clickedCommits.length} selected commit${clickedCommits.length > 1 ? 's' : ''})`
+	$: barTitle = selectedCommits.length > 0
+		? `Lines of Code: ${selectedCommits.length} Selected Commit${selectedCommits.length > 1 ? 's' : ''}`
 		: "Website Language Breakdown";
 
 	async function dotInteraction(index, evt) {
@@ -156,7 +205,7 @@
 
 {#if commits.length > 0}
 <h2>Commits by Time of Day</h2>
-<svg viewBox="0 0 {width} {height}">
+<svg viewBox="0 0 {width} {height}" bind:this={svg}>
 	<g class="gridlines" transform="translate({usableArea.left}, 0)" bind:this={yAxisGridlines} />
 	<g transform="translate(0, {usableArea.bottom})" bind:this={xAxis} />
 	<g transform="translate({usableArea.left}, 0)" bind:this={yAxis} />
@@ -168,7 +217,7 @@
 				r={ rScale(commit.totalLines) }
 				fill="steelblue"
 				fill-opacity="0.6"
-				class:selected={ clickedCommits.includes(commit) }
+				class:selected={ selectedCommits.includes(commit) }
 				on:mouseenter={evt => dotInteraction(index, evt)}
 				on:mouseleave={evt => dotInteraction(index, evt)}
 				on:click={evt => dotInteraction(index, evt)}
@@ -201,6 +250,10 @@
 	<BarHorizontal data={barData} title={barTitle} />
 {:else}
 	<p><em>Loading codebase stats...</em></p>
+{/if}
+
+{#if linesByDate.length > 0}
+	<LineChart data={linesByDate} />
 {/if}
 
 <style>
@@ -265,5 +318,17 @@
 
 	h2 {
 		margin-top: 1.5em;
+	}
+
+	@keyframes marching-ants {
+		to { stroke-dashoffset: -8; }
+	}
+
+	svg :global(.selection) {
+		fill-opacity: 10%;
+		stroke: black;
+		stroke-opacity: 70%;
+		stroke-dasharray: 5 3;
+		animation: marching-ants 2s linear infinite;
 	}
 </style>
